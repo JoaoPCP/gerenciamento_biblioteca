@@ -2,15 +2,18 @@ class Emprestimo {
   private readonly dataEmprestimo: Date;
   private readonly dataDevolucao: Date;
   constructor(
-    // private readonly livro: Livro
+    private readonly livro: Livro,
     private readonly usuario: Usuario,
     private status: string
   ) {
-    // this.livro = livro
+    this.livro = livro;
     this.usuario = usuario;
     this.status = "Em curso";
     this.dataEmprestimo = new Date();
     this.dataDevolucao = this.calculaDevolucao();
+  }
+  getLivro(): Livro {
+    return this.livro;
   }
   getDataEmprestimo(): Date {
     return this.dataEmprestimo;
