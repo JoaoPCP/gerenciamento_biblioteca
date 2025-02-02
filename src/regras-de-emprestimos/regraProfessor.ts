@@ -1,4 +1,4 @@
-class RegraEmprestimoProfessor implements RegraEmprestimo {
+class RegraProfessor implements RegraEmprestimo {
   prazoEmprestimo(): number {
     return 8;
   }
