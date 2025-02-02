@@ -20,14 +20,14 @@ abstract class Usuario {
     this.reservasFeitas.push(reserva);
   }
 
-  //   public devolverlivro(livro: Livro): void {
-  //     const emprestimo = this.emprestimosFeitos.find(
-  //       (emprestimoFeito) => livro === emprestimoFeito.getLivro()
-  //     );
-  //     if (emprestimo) {
-  //       emprestimo.finalizarEmprestimo();
-  //     }
-  //   }
+  public devolverlivro(livro: Livro): void {
+    const emprestimo = this.emprestimosFeitos.find(
+      (emprestimoFeito) => livro === emprestimoFeito.getLivro()
+    );
+    if (emprestimo) {
+      emprestimo.finalizarEmprestimo();
+    }
+  }
 
   public isDevedor(): boolean {
     const hoje = new Date();
@@ -47,21 +47,27 @@ abstract class Usuario {
     );
   }
 
-  // public consultaDataEmprestimo(livro: Livro): Date | null {
-  //     const emprestimo = this.emprestimosFeitos.find(emprestimoFeito => livro === emprestimoFeito.getLivro());
-  //     return emprestimo ? emprestimo.getDataEmprestimo() : null;
-  // }
+  public consultaDataEmprestimo(livro: Livro): Date | null {
+    const emprestimo = this.emprestimosFeitos.find(
+      (emprestimoFeito) => livro === emprestimoFeito.getLivro()
+    );
+    return emprestimo ? emprestimo.getDataEmprestimo() : null;
+  }
 
-  // public consultaDataDevolucao(livro: Livro): Date | null {
-  //     const emprestimo = this.emprestimosFeitos.find(emprestimoFeito => livro === emprestimoFeito.getLivro());
-  //     return emprestimo ? emprestimo.getDataDevolucao() : null;
-  // }
+  public consultaDataDevolucao(livro: Livro): Date | null {
+    const emprestimo = this.emprestimosFeitos.find(
+      (emprestimoFeito) => livro === emprestimoFeito.getLivro()
+    );
+    return emprestimo ? emprestimo.getDataDevolucao() : null;
+  }
 
-  // public hasEmprestimoAberto(livro: Livro): boolean {
-  //     return this.emprestimosFeitos.some(emprestimoFeito =>
-  //         livro === emprestimoFeito.getLivro() && emprestimoFeito.getStatus() === "Em curso"
-  //     );
-  // }
+  public hasEmprestimoAberto(livro: Livro): boolean {
+    return this.emprestimosFeitos.some(
+      (emprestimoFeito) =>
+        livro === emprestimoFeito.getLivro() &&
+        emprestimoFeito.getStatus() === "Em curso"
+    );
+  }
 
   public getCodigoUsuario(): string {
     return this.codigoUsuario;
