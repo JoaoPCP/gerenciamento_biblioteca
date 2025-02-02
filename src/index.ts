@@ -1,1 +1,1 @@
-console.log("Hello World");
+const db = BancoDeDados.instance();
