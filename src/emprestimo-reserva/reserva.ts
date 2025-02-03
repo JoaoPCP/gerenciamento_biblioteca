@@ -1,16 +1,16 @@
 class Reserva {
+  private readonly dataReserva: Date;
   constructor(
-    // private readonly livro: Livro,
-    private readonly usuario: Usuario,
-    private readonly dataReserva: Date
+    private readonly livro: Livro,
+    private readonly usuario: Usuario
   ) {
-    // this.livro = livro;
+    this.livro = livro;
     this.usuario = usuario;
     this.dataReserva = new Date();
   }
-  //   get getLivro(): Livro {
-  //     return this.livro;
-  //   }
+  getLivro(): Livro {
+    return this.livro;
+  }
   getUsuario(): Usuario {
     return this.usuario;
   }
