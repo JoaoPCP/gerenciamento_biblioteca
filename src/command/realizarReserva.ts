@@ -1,4 +1,4 @@
-class realizarReserva implements Command {
+class RealizarReserva implements Command {
   execute(arg: { codUsuario: string; codLivro: string }): string {
     const usuario = db.listaDeUsuarios.find(
       (user) => user.getCodigoUsuario() == arg.codUsuario

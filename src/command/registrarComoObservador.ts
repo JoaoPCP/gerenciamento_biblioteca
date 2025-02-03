@@ -1,4 +1,4 @@
-class registarComoObservador implements Command {
+class RegistrarComoObservador implements Command {
   execute(arg: { codUsuario: string; codLivro: string }) {
     const usuario = db.listaDeUsuarios.find(
       (usuario) => usuario.getCodigoUsuario() == arg.codUsuario

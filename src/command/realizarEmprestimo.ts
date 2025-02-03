@@ -1,4 +1,4 @@
-class realizarEmprestimo implements Command {
+class RealizarEmprestimo implements Command {
   execute(arg: { codUsuario: string; codLivro: string }) {
     const usuario = db.listaDeUsuarios.find(
       (user) => user.getCodigoUsuario() == arg.codUsuario
