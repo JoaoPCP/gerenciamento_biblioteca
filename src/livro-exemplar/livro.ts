@@ -1,3 +1,5 @@
+import Observer from "../usuarios/observador";
+
 class Livro {
   private readonly codigo: string;
   private readonly titulo: string;
@@ -63,3 +65,6 @@ class Livro {
     return this.unidadesReservados;
   }
 }
+
+
+export default Livro;

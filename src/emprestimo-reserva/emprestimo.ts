@@ -1,10 +1,14 @@
+import Livro from "../livro-exemplar/livro";
+import Usuario from "../usuarios/usuario";
+
 class Emprestimo {
   private readonly dataEmprestimo: Date;
   private readonly dataDevolucao: Date;
+  private status: string
   constructor(
     private readonly livro: Livro,
     private readonly usuario: Usuario,
-    private status: string
+
   ) {
     this.livro = livro;
     this.usuario = usuario;
@@ -42,3 +46,6 @@ class Emprestimo {
     return dataDevolucao;
   }
 }
+
+
+export default Emprestimo;

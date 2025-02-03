@@ -1,3 +1,7 @@
+import RegraProfessor from "../regras-de-emprestimos/regraProfessor";
+import Observer from "./observador";
+import Usuario from "./usuario";
+
 class Professor extends Usuario implements Observer {
   private notificacoes: number;
 
@@ -15,3 +19,5 @@ class Professor extends Usuario implements Observer {
     return this.notificacoes;
   }
 }
+
+export default Professor;

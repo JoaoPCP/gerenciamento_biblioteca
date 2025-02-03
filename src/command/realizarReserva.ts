@@ -1,5 +1,9 @@
+import BancoDeDados from "../collections-singleton/BancoDeDados";
+
+
 class realizarReserva implements Command {
   execute(arg: { codUsuario: string; codLivro: string }): string {
+    const db = BancoDeDados.instance();
     const usuario = db.listaDeUsuarios.find(
       (user) => user.getCodigoUsuario() == arg.codUsuario
     );

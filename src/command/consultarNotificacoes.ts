@@ -1,5 +1,8 @@
+import BancoDeDados from "../collections-singleton/BancoDeDados";
+
 class ConsultarNotificacoes implements Command {
   execute(arg: { obsCode: string }): string {
+    const db = BancoDeDados.instance();
     const usuario = db.listaDeUsuarios.find((usuario) => {
       usuario.getCodigoUsuario() == arg.obsCode;
     });

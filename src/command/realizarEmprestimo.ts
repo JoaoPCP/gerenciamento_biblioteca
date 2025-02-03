@@ -1,13 +1,16 @@
+import BancoDeDados from "../collections-singleton/BancoDeDados";
+
+
 class realizarEmprestimo implements Command {
   execute(arg: { codUsuario: string; codLivro: string }) {
+    const db = BancoDeDados.instance();
     const usuario = db.listaDeUsuarios.find(
-      (user) => user.getCodigoUsuario() == arg.codUsuario
+      (user: { getCodigoUsuario: () => string; }) => user.getCodigoUsuario() == arg.codUsuario
     );
 
-    const livro = db.acervo.find((livro) => livro.getCodigo() == arg.codLivro);
-
+    const livro = db.acervo.find((livro: { getCodigo: () => string; }) => livro.getCodigo() == arg.codLivro);
     const exemplaresLivro = db.controleDeExemplares.filter(
-      (exemplar) =>
+      (exemplar: { getLivro: () => any; getStatus: () => string; }) =>
         exemplar.getLivro() == livro && exemplar.getStatus() == "Disponivel"
     );
 
@@ -33,7 +36,7 @@ class realizarEmprestimo implements Command {
       return "Os exemplares presentes estão todos reservados";
     }
 
-    const reservaExistente = usuario.getReservasFeitas().find((reserva) => {
+    const reservaExistente = usuario.getReservasFeitas().find((reserva: { getLivro: () => any; }) => {
       reserva.getLivro() == livro;
     });
     if (reservaExistente) {

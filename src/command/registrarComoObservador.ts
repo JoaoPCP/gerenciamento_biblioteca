@@ -1,5 +1,9 @@
+import BancoDeDados from "../collections-singleton/BancoDeDados";
+
+
 class registarComoObservador implements Command {
   execute(arg: { codUsuario: string; codLivro: string }) {
+    const db = BancoDeDados.instance();
     const usuario = db.listaDeUsuarios.find(
       (usuario) => usuario.getCodigoUsuario() == arg.codUsuario
     );
