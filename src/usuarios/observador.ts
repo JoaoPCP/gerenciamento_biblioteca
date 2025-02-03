@@ -1,4 +1,4 @@
-interface Observer {
-    notificar(): void;
-    getNotificacoes(): number;
+abstract class Observer {
+  abstract notificar(): void;
+  abstract getNotificacoes(): number;
 }

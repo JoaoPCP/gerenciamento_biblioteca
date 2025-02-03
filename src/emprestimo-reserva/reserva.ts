@@ -1,8 +1,8 @@
 class Reserva {
+  private readonly dataReserva: Date;
   constructor(
     private readonly livro: Livro,
-    private readonly usuario: Usuario,
-    private readonly dataReserva: Date
+    private readonly usuario: Usuario
   ) {
     this.livro = livro;
     this.usuario = usuario;
