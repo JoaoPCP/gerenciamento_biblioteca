@@ -9,6 +9,7 @@ class Professor extends Usuario implements Observer {
 
   public notificar(): void {
     this.notificacoes++;
+    
   }
 
   public getNotificacoes(): number {
