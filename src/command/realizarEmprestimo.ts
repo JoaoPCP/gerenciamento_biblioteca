@@ -1,6 +1,5 @@
 class realizarEmprestimo implements Command {
-  execute(arg: { codLivro: string; codUsuario: string }) {
-    const db = BancoDeDados.instance();
+  execute(arg: { codUsuario: string; codLivro: string }) {
     const usuario = db.listaDeUsuarios.find(
       (user) => user.getCodigoUsuario() == arg.codUsuario
     );
@@ -18,6 +17,12 @@ class realizarEmprestimo implements Command {
     if (!livro) {
       return "Livro não encontrado";
     }
+    if (
+      usuario.getEmprestimosFeitos().length >=
+      usuario.getRegraEmprestimo().limiteEmprestimosEmAberto()
+    ) {
+      return "O usuário já está com o numéro máximo de emprestimos feitos permitidos";
+    }
     if (usuario.isDevedor()) {
       return "O usuário não pode realizar empréstimos pois possui emprestimos atrasados";
     }
@@ -27,12 +32,15 @@ class realizarEmprestimo implements Command {
     if (livro.getReservas() > exemplaresLivro.length) {
       return "Os exemplares presentes estão todos reservados";
     }
-    if (
-      usuario.getEmprestimosFeitos().length >=
-      usuario.getRegraEmprestimo().limiteEmprestimosEmAberto()
-    ) {
-      return "O usuário já está com o numéro máximo de emprestimos feitos permitidos";
+
+    const reservaExistente = usuario.getReservasFeitas().find((reserva) => {
+      reserva.getLivro() == livro;
+    });
+    if (reservaExistente) {
+      usuario.removerReserva(reservaExistente);
+      db.removerReserva(reservaExistente);
     }
+
     const exemplarParaEmprestimo = exemplaresLivro[0];
     exemplarParaEmprestimo.emprestar(usuario);
     usuario.guardarEmprestimo(new Emprestimo(livro, usuario, "em Curso"));

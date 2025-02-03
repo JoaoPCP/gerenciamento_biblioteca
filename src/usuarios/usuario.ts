@@ -88,4 +88,8 @@ abstract class Usuario {
   public getReservasFeitas(): Reserva[] {
     return this.reservasFeitas;
   }
+  removerReserva(reservaToRemove: Reserva): void {
+    this.reservasFeitas = this.reservasFeitas.filter(
+      (reserva) => reserva != reservaToRemove
+    );
 }

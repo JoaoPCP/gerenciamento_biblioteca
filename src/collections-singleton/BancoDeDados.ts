@@ -3,6 +3,7 @@ class BancoDeDados {
   private readonly livros: Livro[];
   private readonly usuarios: Usuario[];
   private readonly exemplares: Exemplar[];
+  private _reservas: Reserva[] = [];
 
   private constructor() {
     this.livros = [
@@ -106,5 +107,17 @@ class BancoDeDados {
 
   get controleDeExemplares(): Exemplar[] {
     return this.exemplares;
+  }
+  get reservas(): Reserva[] {
+    return this._reservas;
+  }
+  salvarReserva(reserva: Reserva): void {
+    this._reservas.push(reserva);
+    return;
+  }
+  removerReserva(reservaToRemove: Reserva): void {
+    this._reservas = this._reservas.filter(
+      (reserva) => reserva != reservaToRemove
+    );
   }
 }

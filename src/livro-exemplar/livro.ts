@@ -35,7 +35,6 @@ class Livro {
       this.observadores.splice(index, 1);
     }
   }
-
   public notificarObservadores(): void {
     for (const observer of this.observadores) {
       observer.notificar();
@@ -52,6 +51,9 @@ class Livro {
 
   public fazerReserva(): void {
     this.unidadesReservados++;
+    if (this.unidadesReservados > 2) {
+      this.notificarObservadores;
+    }
   }
   public removerReserva(): void {
     this.unidadesReservados--;
