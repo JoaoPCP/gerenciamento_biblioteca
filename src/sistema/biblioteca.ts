@@ -5,7 +5,7 @@ import Usuario from "../usuarios/usuario";
 import Console from "../console";
 import Exemplar from "../livro-exemplar/exemplar";
 import Livro from "../livro-exemplar/livro";
-import Observer from "../usuarios/observador";
+import Observer from "../usuarios/observer";
 
 class Sistema {
     private livros: Livro[];

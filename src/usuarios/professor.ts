@@ -1,5 +1,5 @@
 import RegraProfessor from "../regras-de-emprestimos/regraProfessor";
-import Observer from "./observador";
+import Observer from "./observer";
 import Usuario from "./usuario";
 
 class Professor extends Usuario implements Observer {

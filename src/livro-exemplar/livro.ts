@@ -1,4 +1,4 @@
-import Observer from "../usuarios/observador";
+import Observer from "../usuarios/observer";
 
 class Livro {
   private readonly codigo: string;
