@@ -98,6 +98,7 @@ abstract class Usuario {
       (reserva) => reserva != reservaToRemove
     );
 }
+
 }
 
 export default Usuario;

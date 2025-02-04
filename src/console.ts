@@ -1,5 +1,12 @@
 // import consultarLivro from "./command/consultarLivro";
 import sistema from "./sistema/biblioteca";
+import ConsultarLivro from "./command/consultarLivro";  
+import ConsultarNotificacoes from "./command/consultarNotificacoes";
+import consultarUsuario from "./command/consultarUsuario";
+import realizarEmprestimo from "./command/realizarEmprestimo";
+import RealizarReserva from "./command/realizarReserva";
+import RegistarComoObservador from "./command/registrarComoObservador";
+import realizarDevolucao from "./command/realizarDevolucao";
 import * as readline from "readline";
 
 
@@ -60,37 +67,38 @@ class Console {
     switch (acao) {
       case "dev":
         if (segundoCodigo) {
-          sistema.executarDevolucao(primeiroCodigo, segundoCodigo);
+          new realizarDevolucao(sistema).execute({ codUsuario: primeiroCodigo, codLivro: segundoCodigo });
         } else {
           this.setOutput("Código de devolução não informado.");
         }
         break;
       case "res":
         if (segundoCodigo) {
-          sistema.executarReserva(primeiroCodigo, segundoCodigo);
+          new RealizarReserva(sistema).execute({ codUsuario: primeiroCodigo, codLivro: segundoCodigo });
         } else {
           this.setOutput("Código de reserva não informado.");
         }
         break;
       case "obs":
         if (segundoCodigo) {
-          sistema.cadastraObservador(primeiroCodigo, segundoCodigo);
+          new RegistarComoObservador(sistema).execute({ codUsuario: primeiroCodigo, codLivro: segundoCodigo })
         } else {
           this.setOutput("Observador não informado.");
         }
         break;
       case "liv":
-        sistema.consultaLivro(primeiroCodigo);
+        new ConsultarLivro(sistema).execute(primeiroCodigo);
         break;
       case "usu":
-        sistema.consultaProfessor(primeiroCodigo);
+        new consultarUsuario(sistema).execute(primeiroCodigo);
         break;
       case "ntf":
-        sistema.consultaProfessor(primeiroCodigo);
+        new ConsultarNotificacoes(sistema).execute(primeiroCodigo);
         break;
       case "emp":
         if (segundoCodigo) {
-          sistema.executarEmprestimo(primeiroCodigo, segundoCodigo);
+          new realizarEmprestimo(sistema).execute({ codUsuario: primeiroCodigo, codLivro: segundoCodigo })
+
         } else {
           this.setOutput("Código de empréstimo não informado.");
         }

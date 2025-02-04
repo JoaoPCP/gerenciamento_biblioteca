@@ -233,14 +233,39 @@ class Sistema {
         }
     }
 
-    public consultaProfessor(codigoUsuario: string): void {
+    public consultarUsuario(codigoUsuario: string): void {
+        let output = "";
+    
         const usuario = this.getUsuarioByCodigo(codigoUsuario);
         if (!usuario) {
-            this.console.setOutput("Usuário não encontrado.");
-            return;
+            return this.console.setOutput("Usuário não encontrado");
+        }
+    
+        output += "Empréstimos:\n";
+        for (const emprestimo of usuario.getEmprestimosFeitos()) {
+            const dataDevolucao = emprestimo.getDataDevolucao() ? emprestimo.getDataDevolucao().toString() : "Não definida";
+            output += `Livro: ${emprestimo.getLivro().getTitulo()}, Data do Empréstimo: ${emprestimo.getDataEmprestimo()}, Status: ${emprestimo.getStatus()}, Data de Devolução: ${dataDevolucao}\n`;
+        }
+    
+        output += "Reservas:\n";
+        for (const reserva of usuario.getReservasFeitas()) {
+            output += `Livro: ${reserva.getLivro().getTitulo()}, Data da Reserva: ${reserva.getDataReserva()}\n`;
         }
 
-        this.console.setOutput(`Empréstimos do usuário ${usuario.getNome()}`);
+        this.console.setOutput(output.trim());
+    }
+    
+    public consultarProfessor(codigoUsuario: string): void {
+        const usuario = this.usuarios.find(
+            usuario => usuario instanceof Professor && usuario.getCodigoUsuario() === codigoUsuario
+        );
+        if (!usuario) {
+            return;
+        } else{
+            const professor = usuario as Professor;
+            const numeroNotificacoes = professor.getNotificacoes();
+            this.console.setOutput(`O professor ${professor.getNome()} foi notificado ${numeroNotificacoes} vezes.`);
+        }
     }
 }
 export default Sistema;
