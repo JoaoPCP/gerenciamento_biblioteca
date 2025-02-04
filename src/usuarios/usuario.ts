@@ -1,3 +1,8 @@
+import Emprestimo from "../emprestimo-reserva/emprestimo";
+import Reserva from "../emprestimo-reserva/reserva";
+import Livro from "../livro-exemplar/livro";
+import RegraEmprestimo from "../regras-de-emprestimos/regraEmprestimo";
+
 abstract class Usuario {
   protected codigoUsuario: string;
   protected nome: string;
@@ -93,3 +98,7 @@ abstract class Usuario {
       (reserva) => reserva != reservaToRemove
     );
 }
+
+}
+
+export default Usuario;

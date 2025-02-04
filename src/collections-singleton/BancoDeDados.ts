@@ -1,3 +1,9 @@
+import Reserva from "../emprestimo-reserva/reserva";
+import Professor from "../usuarios/professor";
+import AlunoGraduacao from "../usuarios/alunoGraduacao";
+import Usuario from "../usuarios/usuario";
+import AlunoPosGraduacao from "../usuarios/alunoPosGraduacao";
+
 class BancoDeDados {
   static _instance: BancoDeDados;
   private readonly livros: Livro[];
@@ -121,3 +127,5 @@ class BancoDeDados {
     );
   }
 }
+
+export default BancoDeDados;

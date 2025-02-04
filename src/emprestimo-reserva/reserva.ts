@@ -1,3 +1,6 @@
+import Livro from "../livro-exemplar/livro";
+import Usuario from "../usuarios/usuario";
+
 class Reserva {
   private readonly dataReserva: Date;
   constructor(
@@ -19,3 +22,5 @@ class Reserva {
     return this.dataReserva;
   }
 }
+
+export default Reserva;

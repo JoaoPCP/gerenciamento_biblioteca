@@ -1,3 +1,5 @@
+import RegraEmprestimo from "./regraEmprestimo";
+
 class RegraPosGraduacao implements RegraEmprestimo {
   prazoEmprestimo(): number {
     return 5;
@@ -7,3 +9,6 @@ class RegraPosGraduacao implements RegraEmprestimo {
     return 3;
   }
 }
+
+
+export default RegraPosGraduacao;

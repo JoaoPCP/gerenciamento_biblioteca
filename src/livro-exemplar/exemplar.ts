@@ -1,3 +1,6 @@
+import Usuario from "../usuarios/usuario";
+import Livro from "./livro";
+
 class Exemplar {
     private readonly livro: Livro;
     private readonly codigoExemplar: string;
@@ -41,3 +44,5 @@ class Exemplar {
         return this.status === "Emprestado";
     }
 }
+
+export default Exemplar;

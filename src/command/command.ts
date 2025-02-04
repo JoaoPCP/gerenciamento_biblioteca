@@ -1,3 +1,5 @@
 interface Command {
-  execute(arg: any): string;
+  execute(arg: any): void;
 }
+
+export default Command;

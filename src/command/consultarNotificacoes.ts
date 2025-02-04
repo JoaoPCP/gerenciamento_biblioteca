@@ -1,15 +1,17 @@
+import Sistema from "../sistema/biblioteca";
+import Command from "./command";
+
 class ConsultarNotificacoes implements Command {
-  execute(arg: { obsCode: string }): string {
-    const usuario = db.listaDeUsuarios.find((usuario) => {
-      usuario.getCodigoUsuario() == arg.obsCode;
-    });
-    if (!usuario) {
-      return "Usuario não foi encontrado";
-    }
-    if (usuario instanceof Observer) {
-      return `Usuario: ${usuario.getNome()}\n
-      Notificações recebidas: ${usuario.getNotificacoes()}`;
-    }
-    return "O usuário não é um observador, logo não possuiu notificações";
+  private sistema: Sistema;
+
+  constructor(sistema: Sistema) {
+    this.sistema = sistema;
+  }
+
+  public execute(obsCode: any): void {
+    this.sistema.consultarProfessor(obsCode);
+
   }
 }
+
+export default ConsultarNotificacoes;
