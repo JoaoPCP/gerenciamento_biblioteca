@@ -9,16 +9,26 @@ import RegistarComoObservador from "./command/registrarComoObservador";
 import realizarDevolucao from "./command/realizarDevolucao";
 import * as readline from "readline";
 
-
 class Console {
   private static instance: Console;
   private rl: readline.Interface;
+  private commandMap: Map<string, Function>;
 
   private constructor() {
     this.rl = readline.createInterface({
       input: process.stdin,
       output: process.stdout,
     });
+
+    this.commandMap = new Map([
+      ["dev", (sistema: sistema, usuario: string, livro: string) => new realizarDevolucao(sistema).execute({ codUsuario: usuario, codLivro: livro })],
+      ["res", (sistema: sistema, usuario: string, livro: string) => new RealizarReserva(sistema).execute({ codUsuario: usuario, codLivro: livro })],
+      ["obs", (sistema: sistema, usuario: string, livro: string) => new RegistarComoObservador(sistema).execute({ codUsuario: usuario, codLivro: livro })],
+      ["liv", (sistema: sistema, usuario: string) => new ConsultarLivro(sistema).execute(usuario)],
+      ["usu", (sistema: sistema, usuario: string) => new consultarUsuario(sistema).execute(usuario)],
+      ["ntf", (sistema: sistema, usuario: string) => new ConsultarNotificacoes(sistema).execute(usuario)],
+      ["emp", (sistema: sistema, usuario: string, livro: string) => new realizarEmprestimo(sistema).execute({ codUsuario: usuario, codLivro: livro })],
+    ]);
   }
 
   public static getInstance(): Console {
@@ -64,49 +74,12 @@ class Console {
       return this.processarComando(sistema);
     }
 
-    switch (acao) {
-      case "dev":
-        if (segundoCodigo) {
-          new realizarDevolucao(sistema).execute({ codUsuario: primeiroCodigo, codLivro: segundoCodigo });
-        } else {
-          this.setOutput("Código de devolução não informado.");
-        }
-        break;
-      case "res":
-        if (segundoCodigo) {
-          new RealizarReserva(sistema).execute({ codUsuario: primeiroCodigo, codLivro: segundoCodigo });
-        } else {
-          this.setOutput("Código de reserva não informado.");
-        }
-        break;
-      case "obs":
-        if (segundoCodigo) {
-          new RegistarComoObservador(sistema).execute({ codUsuario: primeiroCodigo, codLivro: segundoCodigo })
-        } else {
-          this.setOutput("Observador não informado.");
-        }
-        break;
-      case "liv":
-        new ConsultarLivro(sistema).execute(primeiroCodigo);
-        break;
-      case "usu":
-        new consultarUsuario(sistema).execute(primeiroCodigo);
-        break;
-      case "ntf":
-        new ConsultarNotificacoes(sistema).execute(primeiroCodigo);
-        break;
-      case "emp":
-        if (segundoCodigo) {
-          new realizarEmprestimo(sistema).execute({ codUsuario: primeiroCodigo, codLivro: segundoCodigo })
-
-        } else {
-          this.setOutput("Código de empréstimo não informado.");
-        }
-        break;
-      default:
-        this.setOutput("Comando desconhecido.");
+    const command = this.commandMap.get(acao);
+    if (command) {
+      command(sistema, primeiroCodigo, segundoCodigo);
+    } else {
+      this.setOutput("Comando desconhecido.");
     }
-  
 
     return this.processarComando(sistema);
   }

@@ -257,7 +257,7 @@ class Sistema {
     
     public consultarProfessor(codigoUsuario: string): void {
         const usuario = this.usuarios.find(
-            usuario => usuario instanceof Professor && usuario.getCodigoUsuario() === codigoUsuario
+            usuario => usuario.getCodigoUsuario() === codigoUsuario
         );
         if (!usuario) {
             return;
