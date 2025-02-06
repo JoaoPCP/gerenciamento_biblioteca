@@ -3,13 +3,14 @@ import Professor from "../usuarios/professor";
 import AlunoGraduacao from "../usuarios/alunoGraduacao";
 import Usuario from "../usuarios/usuario";
 import AlunoPosGraduacao from "../usuarios/alunoPosGraduacao";
+import Livro from "../livro-exemplar/livro";
+import Exemplar from "../livro-exemplar/exemplar";
 
-class BancoDeDados {
-  static _instance: BancoDeDados;
+class Singleton {
+  static _instance: Singleton;
   private readonly livros: Livro[];
   private readonly usuarios: Usuario[];
   private readonly exemplares: Exemplar[];
-  private _reservas: Reserva[] = [];
 
   private constructor() {
     this.livros = [
@@ -96,9 +97,9 @@ class BancoDeDados {
       new Exemplar(this.livros.find((l) => l.getCodigo() === "400")!, "09"),
     ];
   }
-  static instance(): BancoDeDados {
-    if (!BancoDeDados.instance) {
-      this._instance = new BancoDeDados();
+  static instance(): Singleton {
+    if (!Singleton._instance) {
+      this._instance = new Singleton();
     }
     return this._instance;
   }
@@ -114,18 +115,6 @@ class BancoDeDados {
   get controleDeExemplares(): Exemplar[] {
     return this.exemplares;
   }
-  get reservas(): Reserva[] {
-    return this._reservas;
-  }
-  salvarReserva(reserva: Reserva): void {
-    this._reservas.push(reserva);
-    return;
-  }
-  removerReserva(reservaToRemove: Reserva): void {
-    this._reservas = this._reservas.filter(
-      (reserva) => reserva != reservaToRemove
-    );
-  }
 }
 
-export default BancoDeDados;
+export default Singleton;
