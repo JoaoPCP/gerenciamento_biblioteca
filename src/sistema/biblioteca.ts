@@ -7,6 +7,8 @@ import Exemplar from "../livro-exemplar/exemplar";
 import Livro from "../livro-exemplar/livro";
 import Observer from "../usuarios/observer";
 
+
+// Essa classe implementa o sistema/biblioteca com seus atributos e define os métodos assim como a lógica por trás.
 class Sistema {
     private livros: Livro[];
     private exemplares: Exemplar[];
@@ -21,17 +23,18 @@ class Sistema {
         this.reservas = [];
     }
 
-    private getUsuarioByCodigo(codigoUsuario: string): Usuario | null {
+    public getUsuarioByCodigo(codigoUsuario: string): Usuario | null {
         return this.usuarios.find(usuario => usuario.getCodigoUsuario() === codigoUsuario) || null;
     }
 
-    private getLivroByCodigo(codigoLivro: string): Livro | null {
+    public getLivroByCodigo(codigoLivro: string): Livro | null {
         return this.livros.find(livro => livro.getCodigo() === codigoLivro) || null;
     }
 
-    private getExemplaresByLivro(livro: Livro): Exemplar[] {
+    public getExemplaresByLivro(livro: Livro): Exemplar[] {
         return this.exemplares.filter(exemplar => exemplar.getLivro() === livro);
     }
+
 
     public executarEmprestimo(codigoUsuario: string, codigoLivro: string): void {
         const usuario = this.getUsuarioByCodigo(codigoUsuario);

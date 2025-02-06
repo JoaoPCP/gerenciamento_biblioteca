@@ -3,6 +3,8 @@ import Professor from "../usuarios/professor";
 import AlunoGraduacao from "../usuarios/alunoGraduacao";
 import Usuario from "../usuarios/usuario";
 import AlunoPosGraduacao from "../usuarios/alunoPosGraduacao";
+import Livro from "../livro-exemplar/livro";
+import Exemplar from "../livro-exemplar/exemplar";
 
 class BancoDeDados {
   static _instance: BancoDeDados;

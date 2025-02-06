@@ -24,9 +24,9 @@ class Console {
       ["dev", (sistema: sistema, usuario: string, livro: string) => new realizarDevolucao(sistema).execute({ codUsuario: usuario, codLivro: livro })],
       ["res", (sistema: sistema, usuario: string, livro: string) => new RealizarReserva(sistema).execute({ codUsuario: usuario, codLivro: livro })],
       ["obs", (sistema: sistema, usuario: string, livro: string) => new RegistarComoObservador(sistema).execute({ codUsuario: usuario, codLivro: livro })],
-      ["liv", (sistema: sistema, usuario: string) => new ConsultarLivro(sistema).execute(usuario)],
+      ["liv", (sistema: sistema, livro: string) => new ConsultarLivro(sistema, livro).execute()],
       ["usu", (sistema: sistema, usuario: string) => new consultarUsuario(sistema).execute(usuario)],
-      ["ntf", (sistema: sistema, usuario: string) => new ConsultarNotificacoes(sistema).execute(usuario)],
+      ["ntf", (sistema: sistema, usuario: string) => new ConsultarNotificacoes(sistema, usuario).execute()],
       ["emp", (sistema: sistema, usuario: string, livro: string) => new realizarEmprestimo(sistema).execute({ codUsuario: usuario, codLivro: livro })],
     ]);
   }
