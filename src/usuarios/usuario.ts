@@ -39,7 +39,7 @@ abstract class Usuario {
     return this.emprestimosFeitos.some(
       (emprestimoFeito) =>
         emprestimoFeito.getStatus() === "Em curso" &&
-        hoje > emprestimoFeito.getDataDevolucao()
+        hoje >= emprestimoFeito.getDataDevolucao()
     );
   }
 

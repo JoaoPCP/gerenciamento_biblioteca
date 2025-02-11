@@ -38,7 +38,7 @@ class Emprestimo {
     this.status = "Finalizado";
   }
   calculaDevolucao(): Date {
-    const dataDevolucao = this.dataEmprestimo;
+    const dataDevolucao = new Date(this.dataEmprestimo);
     dataDevolucao.setDate(
       dataDevolucao.getDate() +
         this.usuario.getRegraEmprestimo().prazoEmprestimo()

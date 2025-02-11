@@ -6,7 +6,7 @@ class RegraGraduacao implements RegraEmprestimo {
   }
 
   limiteEmprestimosEmAberto(): number {
-    return 3;
+    return 2;
   }
 }
 
