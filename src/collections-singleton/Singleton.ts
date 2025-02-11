@@ -6,12 +6,11 @@ import AlunoPosGraduacao from "../usuarios/alunoPosGraduacao";
 import Livro from "../livro-exemplar/livro";
 import Exemplar from "../livro-exemplar/exemplar";
 
-class BancoDeDados {
-  static _instance: BancoDeDados;
+class Singleton {
+  static _instance: Singleton;
   private readonly livros: Livro[];
   private readonly usuarios: Usuario[];
   private readonly exemplares: Exemplar[];
-
 
   private constructor() {
     this.livros = [
@@ -98,11 +97,11 @@ class BancoDeDados {
       new Exemplar(this.livros.find((l) => l.getCodigo() === "400")!, "09"),
     ];
   }
-  public static getInstance(): BancoDeDados {
-    if (!BancoDeDados._instance) {
-      BancoDeDados._instance = new BancoDeDados();
+  static instance(): Singleton {
+    if (!Singleton._instance) {
+      this._instance = new Singleton();
     }
-    return BancoDeDados._instance;
+    return this._instance;
   }
 
   get acervo(): Livro[] {
@@ -118,4 +117,4 @@ class BancoDeDados {
   }
 }
 
-export default BancoDeDados;
+export default Singleton;
